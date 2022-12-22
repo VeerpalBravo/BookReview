@@ -32,11 +32,20 @@ public class Book implements Parcelable {
         private String currencyCode;
         private double amount;
         private String bookid;
+        int favIcon;
+
+    public int getFavIcon() {
+        return favIcon;
+    }
+
+    public void setFavIcon(int favIcon) {
+        this.favIcon = favIcon;
+    }
 
     public Book(String title, String subtitle, ArrayList<String> authors, String publisher,
                 String publishedDate, String description, int pageCount, ArrayList<String> category,
-                String thumbnail,String infoLink, String buyLink, String saleability,
-                String currencyCode,double amount, String id) {
+                String thumbnail, String infoLink, String buyLink, String saleability,
+                String currencyCode, double amount, String id, int favIcon) {
         this.title = title;
         this.subtitle = subtitle;
         this.authors = authors;
@@ -52,6 +61,7 @@ public class Book implements Parcelable {
         this.currencyCode = currencyCode;
         this.amount = amount;
         this.bookid = id;
+        this.favIcon=favIcon;
     }
 
     protected Book(Parcel in) {

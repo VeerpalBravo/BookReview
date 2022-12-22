@@ -28,17 +28,29 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DBManager.DataBaseListener{
 
     public static Context context;
     TabLayout tabLayout;
     ViewPager2 viewPager2;
     MyViewPagerAdapter myViewPagerAdapter;
+    ArrayList<FavBooks> bookIDArrayList=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ((MyApp)getApplication()).db.listener=this;
+        ((MyApp)getApplication()).db.getBookDB(this);
+        ((MyApp) getApplication()).db.getTitleFavBooks();
+        System.out.println(((MyApp)getApplication()).sb.getBookIDList()
+        +" booIDList "+bookIDArrayList);
+        for(int i=0;i<bookIDArrayList.size();i++)
+        {
+            Log.d("bookList: ",bookIDArrayList.get(i).getBookID());
+        }
+
         tabLayout=findViewById(R.id.tabLayout);
         viewPager2 =findViewById(R.id.viewpager);
         context=this;
@@ -100,4 +112,32 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void insertingCommentsCompleted() {
+
+    }
+
+    @Override
+    public void gettingCommentsCompleted(Comments[] list) {
+
+    }
+
+    @Override
+    public void insertingBooksCompleted() {
+
+    }
+
+    @Override
+    public void gettingFavBooksCompleted(FavBooks[] list) {
+
+    }
+
+    @Override
+    public void gettingFavBooksTitleCompleted(FavBooks[] list) {
+        bookIDArrayList=new ArrayList( Arrays.asList(list));
+        for(int i=0;i<bookIDArrayList.size();i++) {
+            ((MyApp) context.getApplicationContext()).
+                    sb.bookIDList.add(bookIDArrayList.get(i).getBookID());
+        }
+    }
 }

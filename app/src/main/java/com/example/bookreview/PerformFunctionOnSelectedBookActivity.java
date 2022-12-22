@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -37,14 +38,15 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity imp
     Button bookRatingBtn;
     String bookID;
     ToggleButton favorite;
-    ArrayList<FavBooks> titleArrayList = new ArrayList<>();
 
+
+    int position;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perform_function_on_selected_book);
         setTitle("Book Description");
-        int position =((MyApp)getApplication()).pos;
+        position =((MyApp)getApplication()).pos;
         title=findViewById(R.id.titlePerformFunc);
         subtitle=findViewById(R.id.subtitlePerformFunc);
         author=findViewById(R.id.authorPerformFunc);
@@ -60,7 +62,6 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity imp
         bookRatingBtn=findViewById(R.id.RateBookBtn);
         favorite=findViewById(R.id.favoriteIcon);
         hyperTextLink=findViewById(R.id.hyperTextLinkPerformFunc);
-        showBookDescription(position);
         bookRatingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,8 +92,9 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity imp
         String linkUrl=((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getThumbnail();
         String url ="<a href=\"link\">"+linkUrl+"</a>";
         String titleV="<b>Title: </b>";
+        String titleFromJson=((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getTitle();
         bookID=((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getBookid();
-        title.setText(Html.fromHtml(titleV)+((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getTitle());
+        title.setText(Html.fromHtml(titleV)+titleFromJson);
         title.setTextColor(getResources().getColor(R.color.purple_500));
         subtitle.setText("Subtitle: "+((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getSubtitle());
         subtitle.setTextColor(getResources().getColor(R.color.purple_200));
@@ -126,24 +128,29 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity imp
         }
         Glide.with(this).load(((MyApp)getApplication()).sb.getFullDescBookList().get(pos).
                 getThumbnail()).into(img);
+        if(((MyApp)getApplication()).sb.getBookIDList().contains(bookID)){
+            favorite.setChecked(true);
+        }
 
     }
+
+
     public void favToggleBtnFunc(){
         if(favorite.isChecked()){
+
             int pos=((MyApp)getApplication()).pos;
             ((MyApp)getApplication()).db.getTitleFavBooks();
-            if(titleArrayList.contains(((MyApp)getApplication()).sb.getFullDescBookList()
-                    .get(pos).getTitle())){
+            if(((MyApp)getApplication()).sb.getBookIDList().contains(bookID)){
                 Toast.makeText(PerformFunctionOnSelectedBookActivity.this,
                         "This is already in favorite list.",Toast.LENGTH_SHORT).show();
 
             }
             else {
-                ((MyApp) getApplication()).db.insertNewFavBookAsync((new
+                ((MyApp) getApplication()).db.insertNewFavBookAsync(new
                         FavBooks(((MyApp) getApplication()).sb.getFullDescBookList().get(pos).getTitle(),
                         ((MyApp) getApplication()).sb.getFullDescBookList().get(pos).getThumbnail(),
                         ((MyApp) getApplication()).sb.getFullDescBookList().get(pos).getBookid(),
-                        ((MyApp) getApplication()).query)));
+                        ((MyApp) getApplication()).query));
                 AlertDialog.Builder builder = new AlertDialog.Builder(PerformFunctionOnSelectedBookActivity.this);
                 builder.setMessage("Your book saved in favorite list.").show();
             }
@@ -159,6 +166,8 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity imp
         super.onResume();
         ((MyApp)getApplication()).db.listener=this;
         ((MyApp)getApplication()).db.getBookDB(this);
+        //toggleButtonFunc();
+        showBookDescription(position);
     }
 
     @Override
@@ -182,6 +191,6 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity imp
     }
         @Override
         public void gettingFavBooksTitleCompleted(FavBooks[] list) {
-                titleArrayList=new ArrayList( Arrays.asList(list));
+
         }
 }

@@ -8,6 +8,7 @@ import java.util.concurrent.Executors;
 
 public class MyApp extends Application {
     public int pos;
+    public int toggleBtn;
     SearchedBooks sb = new SearchedBooks();
     JsonService jsonService = new JsonService();
     public DBManager db = new DBManager();

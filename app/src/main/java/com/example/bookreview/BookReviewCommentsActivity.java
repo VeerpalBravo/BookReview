@@ -18,6 +18,7 @@ public class BookReviewCommentsActivity extends AppCompatActivity implements
     RecyclerView commentList;
     BookReviewRecyclerView adapter;
     ArrayList<Comments> clist = new ArrayList<>(0);
+    String bookID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,20 +26,24 @@ public class BookReviewCommentsActivity extends AppCompatActivity implements
         int pos = ((MyApp) getApplication()).pos;
         setTitle("Comments for Book: "+((MyApp)getApplication()).sb.getFullDescBookList().
                 get(pos).getTitle());
-        String bookID=((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getBookid();
+        bookID=((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getBookid();
         commentList = findViewById(R.id.comment_list);
-        ((MyApp)getApplication()).db.getAllComments(bookID);
-        adapter = new BookReviewRecyclerView(clist,this);
-        commentList.setAdapter(adapter);
-        adapter.listener=this;
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
-        commentList.setLayoutManager(linearLayoutManager);
+
     }
     @Override
     protected void onResume() {
         super.onResume();
         ((MyApp)getApplication()).db.listener=this;
         ((MyApp)getApplication()).db.getDB(BookReviewCommentsActivity.this);
+        reviewComments();
+    }
+    public void reviewComments(){
+        ((MyApp)getApplication()).db.getAllComments(bookID);
+        adapter = new BookReviewRecyclerView(clist,this);
+        commentList.setAdapter(adapter);
+        adapter.listener=this;
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
+        commentList.setLayoutManager(linearLayoutManager);
     }
 
     @Override

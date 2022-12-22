@@ -68,7 +68,7 @@ public class JsonService {
                 ((MyApp)context.getApplicationContext()).sb.setBookList(bookTitle,imageUrl,subTitle,bookId);
                 ((MyApp)context.getApplicationContext()).sb.fullDescBookList(bookTitle,subTitle,authors,
                         publisher,published_Date,description,pageCount,
-                        categories,imageUrl,infoLink,buyLink,saleability,currencyCode,amount,bookId);
+                        categories,imageUrl,infoLink,buyLink,saleability,currencyCode,amount,bookId,0);
 //                Log.d("NumberOFBooks",((MyApp)context.getApplicationContext()).sb.getBookList().get(i).getThumbnail()+" "+
 //                        ((MyApp)context.getApplicationContext()).sb.getBookList().get(i).getTitle());
 

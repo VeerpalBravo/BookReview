@@ -10,6 +10,6 @@ public interface BookDao {
     public void insertFavBook(FavBooks book);
     @Query("Select * from FavBooks")
     public FavBooks[] getAllFavBooks();
-    @Query("Select id,title from FavBooks")
+    @Query("Select id,bookID from FavBooks")
     public FavBooks[] getTitleFavBooks();
 }

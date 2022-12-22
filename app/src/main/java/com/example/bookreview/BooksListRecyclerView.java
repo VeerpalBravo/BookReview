@@ -10,11 +10,12 @@ import android.os.Bundle;
 import android.util.Log;
 
 public class BooksListRecyclerView extends AppCompatActivity implements NetworkingServiceForBooks.NetworkingListener,
-        BookInfoRecyclerView.ItemClickListener {
+        BookInfoRecyclerView.ItemClickListener{
 
     RecyclerView bookList;
     String query;
     BookInfoRecyclerView adapter;
+    int toggleBtnValue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,4 +93,5 @@ public class BooksListRecyclerView extends AppCompatActivity implements Networki
     public void gettingImageIsCompleted(Bitmap image) {
 
     }
+
 }

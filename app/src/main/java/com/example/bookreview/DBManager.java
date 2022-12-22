@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.room.Room;
 
@@ -73,10 +74,11 @@ public class DBManager {
 
     void getAllComments(String bookID){
         MyApp.executorService.execute(new Runnable() {
+            Comments[] list;
             @Override
             public void run() {
                 Log.d("bookID: ",bookID);
-                Comments[] list = commentsDB.getDao().getAllComments(bookID);
+                list = commentsDB.getDao().getAllComments(bookID);
                 dbHandler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -105,9 +107,15 @@ public class DBManager {
     }
     public void getTitleFavBooks() {
         MyApp.executorService.execute(new Runnable() {
+            FavBooks[] list;
             @Override
             public void run() {
-                FavBooks[] list = bookDB.getDao().getTitleFavBooks();
+                try {
+                  list = bookDB.getDao().getTitleFavBooks();
+                }
+                catch (Exception e){
+
+                }
                 dbHandler.post(new Runnable() {
                     @Override
                     public void run() {
