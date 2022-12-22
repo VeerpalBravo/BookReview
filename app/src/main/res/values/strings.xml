@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">BookReview</string>
+    <string name="book_title">Book Title</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_book">Search Book</string>
+    <string name="recently_reviewed_book">Recently Reviewed Book</string>
+    <string name="maximum_reviewed_book">Maximum Reviewed Book</string>
+    <string name="title">Title</string>
+    <string name="subtitle">subtitle</string>
+    <string name="author">author</string>
+    <string name="category">category</string>
+    <string name="bookprice">BookPrice</string>
+    <string name="publisher">publisher</string>
+    <string name="publishdate">publishdate</string>
+    <string name="rate_this_book">Rate this Book</string>
+    <string name="review_comments">Review Comments</string>
+    <string name="buy_this_book">Buy this Book</string>
+    <string name="instruction">You can select star once only, not able to update</string>
+    <string name="comment">comment</string>
+    <string name="rating">rating</string>
+</resources>
