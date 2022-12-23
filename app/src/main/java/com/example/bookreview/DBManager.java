@@ -18,6 +18,7 @@ public class DBManager {
         void gettingFavBooksCompleted(FavBooks[] list);
         void gettingFavBooksTitleCompleted(FavBooks[] list);
         void deleteFavBookCompleted();
+        void deleteFavBookWithBookIDCompleted();
     }
 
     public DataBaseListener listener;
@@ -142,6 +143,25 @@ public class DBManager {
                     public void run() {
                         // notify main thread
                         listener.deleteFavBookCompleted();
+                    }
+                });
+            }
+        });
+    }
+    public void deleteFavBookWithBookID(String book) {
+        MyApp.executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    bookDB.getDao().deleteFavBook(book);
+                } catch (Exception e) {
+
+                }
+                dbHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        // notify main thread
+                        listener.deleteFavBookWithBookIDCompleted();
                     }
                 });
             }

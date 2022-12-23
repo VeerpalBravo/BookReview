@@ -19,4 +19,6 @@
     <string name="instruction">You can select star once only, not able to update</string>
     <string name="comment">comment</string>
     <string name="rating">rating</string>
+    <string name="rate_and_review">Rate and Review</string>
+    <string name="enter_reviews">Enter reviews</string>
 </resources>

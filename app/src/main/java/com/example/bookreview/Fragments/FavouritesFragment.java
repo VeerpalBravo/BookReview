@@ -94,6 +94,12 @@ public class FavouritesFragment extends Fragment implements  FavBookRecyclerView
     @Override
     public void deleteFavBookCompleted() {
         ((MyApp)getActivity().getApplication()).db.getAllFavBooks();
+        ((MyApp)getActivity().getApplication()).toggleBtn=0;
+    }
+
+    @Override
+    public void deleteFavBookWithBookIDCompleted() {
+
     }
 
     ItemTouchHelper.SimpleCallback callback= new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT) {
@@ -107,8 +113,6 @@ public class FavouritesFragment extends Fragment implements  FavBookRecyclerView
             Snackbar.make(flfav,
                     "Item deleted",Snackbar.LENGTH_SHORT).show();
             ((MyApp)getActivity().getApplication()).toggleBtn=0;
-           // favBookArrayList.remove(viewHolder.getAbsoluteAdapterPosition());
-           // adapter.notifyDataSetChanged();
             ((MyApp)getActivity().getApplication()).db.deleteFavBook(adapter.getFavbooksPosition(
                     viewHolder.getAbsoluteAdapterPosition()));
         }

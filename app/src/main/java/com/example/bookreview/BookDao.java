@@ -15,4 +15,6 @@ public interface BookDao {
     public FavBooks[] getTitleFavBooks();
     @Delete
     void deleteFavBook(FavBooks book);
+    @Query("Delete from FavBooks where bookID=:bookID")
+    public void deleteFavBook(String bookID);
 }

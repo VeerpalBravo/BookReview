@@ -133,10 +133,15 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity imp
         }
         Glide.with(this).load(((MyApp)getApplication()).sb.getFullDescBookList().get(pos).
                 getThumbnail()).into(img);
+        System.out.println(((MyApp)getApplication()).sb.getBookIDList());
         if(((MyApp)getApplication()).sb.getBookIDList().contains(bookID)){
-                if(((MyApp)getApplication()).toggleBtn==1){
-            favorite.setChecked(true);
-
+                if(((MyApp)getApplication()).sb.getBookIDList().contains(bookID)){
+                    favorite.setChecked(true);
+                    ((MyApp)getApplication()).toggleBtn=1;
+                }
+                else{
+                    favorite.setChecked(false);
+                    ((MyApp)getApplication()).toggleBtn=0;
                 }
         }
 
@@ -165,7 +170,8 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity imp
             }
         }
         else{
-            ((MyApp)getApplication()).toggleBtn=0;
+            ((MyApp)getApplication()).db.deleteFavBookWithBookID(bookID);
+            ((MyApp)getApplication()).toggleBtn=0;;
         }
     }
 
@@ -204,6 +210,11 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity imp
 
     @Override
     public void deleteFavBookCompleted() {
+
+    }
+
+    @Override
+    public void deleteFavBookWithBookIDCompleted() {
 
     }
 

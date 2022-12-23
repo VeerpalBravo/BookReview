@@ -17,7 +17,7 @@
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent=".02"
+        app:layout_constraintGuide_percent=".05"
         android:orientation="horizontal"/>
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/bookReview"
-            android:text="Rate and Comment this Book "
+            android:text="@string/rate_and_review"
             android:textStyle="bold"
             android:layout_weight="1"
             android:textSize="20dp"
@@ -51,8 +51,7 @@
             android:id="@+id/InstructionTV"
             android:text="@string/instruction"
             android:layout_weight="1"
-            android:textColorHighlight="@color/Red"
-            android:textColor="@color/black">
+            android:textColor="@color/Red">
         </TextView>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -119,31 +118,38 @@
 
         </LinearLayout>
     </LinearLayout>
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:layout_marginStart="16dp"-->
-<!--        android:layout_marginEnd="16dp"-->
-<!--        android:hint="Enter Comment"-->
-<!--        app:layout_constraintBottom_toTopOf="@id/guideline2"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/guideline1">-->
-
-    <EditText
-        android:id="@+id/editText"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:ellipsize="end"
-        android:maxLines="5"
-        tools:ignore="KeyboardInaccessibleWidget"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Enter Reviews"
         app:layout_constraintBottom_toTopOf="@id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline1"
-        />
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
+        app:layout_constraintTop_toBottomOf="@id/guideline1">
+<com.google.android.material.textfield.TextInputEditText
+    android:id="@+id/editText"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+</com.google.android.material.textfield.TextInputEditText>
+<!--    <EditText-->
+<!--        android:id="@+id/editText"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:ellipsize="end"-->
+<!--        android:maxLines="5"-->
+<!--        android:hint="@string/enter_reviews"-->
+<!--        tools:ignore="KeyboardInaccessibleWidget"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/guideline2"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/guideline1"-->
+<!--        />-->
+ </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"

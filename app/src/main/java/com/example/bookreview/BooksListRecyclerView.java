@@ -37,6 +37,7 @@ public class BooksListRecyclerView extends AppCompatActivity implements Networki
         }
         ((MyApp)getApplication()).sb.getBookList().clear();
         ((MyApp)getApplication()).sb.getFullDescBookList().clear();
+        ((MyApp)getApplication()).sb.bookIDList.clear();
         Intent intent = getIntent();
         query = intent.getStringExtra("query");
 
@@ -137,6 +138,11 @@ public class BooksListRecyclerView extends AppCompatActivity implements Networki
 
     @Override
     public void deleteFavBookCompleted() {
+
+    }
+
+    @Override
+    public void deleteFavBookWithBookIDCompleted() {
 
     }
 }

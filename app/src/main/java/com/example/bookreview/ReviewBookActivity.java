@@ -1,10 +1,13 @@
 package com.example.bookreview;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,7 +30,7 @@ DBManager.DataBaseListener{
     ToggleButton starbtn5;
     Button save;
     Button cancel;
-    EditText comment;
+    TextInputEditText comment;
     String bookID;
     MaterialButtonToggleGroup toggleButtonGroup;
     int rating=0;
@@ -55,12 +58,21 @@ DBManager.DataBaseListener{
         comment=findViewById(R.id.editText);
         cancel= findViewById(R.id.cancelBtn);
         save=findViewById(R.id.saveBtn);
+        Log.d("valueRating", rating+"onCreate");
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MyApp)getApplication()).db.insertNewCommentAsync(new Comments(bookID,rating,comment.getText().toString()));
-                AlertDialog.Builder builder =new AlertDialog.Builder(ReviewBookActivity.this);
-                builder.setMessage("Your comment saved.").show();
+                Log.d("reviewVaues: ",rating+ String.valueOf(comment.getText().toString().isEmpty()));
+                String msg = "";
+                if(rating==0 || comment.getText().toString().isEmpty()){
+                    Log.d("reviewVaues: ",rating+ String.valueOf(comment.getText().toString().isEmpty()));
+                    msg="Please enter reviews and select atleast one star for rating";
+                }
+                else {
+                    ((MyApp) getApplication()).db.insertNewCommentAsync(new Comments(bookID, rating, comment.getText().toString()));
+                    msg = "your feedback is submitted successfully.";
+                }
+                showAlert(msg);
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +93,10 @@ DBManager.DataBaseListener{
     protected void onResume() {
         super.onResume();
 
+    }
+    public void showAlert(String msg){
+        AlertDialog.Builder builder = new AlertDialog.Builder(ReviewBookActivity.this);
+        builder.setMessage(msg).show();
     }
 
     @Override
@@ -179,5 +195,24 @@ DBManager.DataBaseListener{
     @Override
     public void deleteFavBookCompleted() {
 
+    }
+
+    @Override
+    public void deleteFavBookWithBookIDCompleted() {
+
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("rating", rating);
+        Log.d("valueRating", rating+"savedState");
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        rating = savedInstanceState.getInt("rating",0);
+        Log.d("valueRating", rating+"savedRestoreState");
     }
 }

@@ -80,6 +80,11 @@ public class BookReviewCommentsActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void deleteFavBookWithBookIDCompleted() {
+
+    }
+
+    @Override
     public void onItemClick(int pos) {
 
     }
