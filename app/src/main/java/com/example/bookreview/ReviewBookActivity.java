@@ -175,4 +175,9 @@ DBManager.DataBaseListener{
     public void gettingFavBooksTitleCompleted(FavBooks[] list) {
 
     }
+
+    @Override
+    public void deleteFavBookCompleted() {
+
+    }
 }

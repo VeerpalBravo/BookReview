@@ -3,11 +3,14 @@ package com.example.bookreview;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
+import android.text.style.URLSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -89,8 +92,9 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity imp
     }
 
     public void showBookDescription(int pos){
-        String linkUrl=((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getThumbnail();
-        String url ="<a href=\"link\">"+linkUrl+"</a>";
+        String linkUrl=((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getInfoLink();
+        String url =String.format("<a href=\"%s\">Click here for more info:"+linkUrl+"</a> ", linkUrl);
+        Log.d("url",url);
         String titleV="<b>Title: </b>";
         String titleFromJson=((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getTitle();
         bookID=((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getBookid();
@@ -103,6 +107,7 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity imp
         publishedDate.setTextColor(getResources().getColor(R.color.black));
         publishedDate.setText("Published on: "+((MyApp)getApplication()).sb.getFullDescBookList().get(pos).getPublishedDate());
         hyperTextLink.setText(Html.fromHtml(url));
+        Log.d("url",hyperTextLink.getText().toString());
         hyperTextLink.setTextColor(getResources().getColor(R.color.purple_500));
         hyperTextLink.setMovementMethod(LinkMovementMethod.getInstance());
         description.setTextColor(getResources().getColor(R.color.black));
@@ -129,7 +134,10 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity imp
         Glide.with(this).load(((MyApp)getApplication()).sb.getFullDescBookList().get(pos).
                 getThumbnail()).into(img);
         if(((MyApp)getApplication()).sb.getBookIDList().contains(bookID)){
+                if(((MyApp)getApplication()).toggleBtn==1){
             favorite.setChecked(true);
+
+                }
         }
 
     }
@@ -146,6 +154,7 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity imp
 
             }
             else {
+                ((MyApp)getApplication()).toggleBtn=1;
                 ((MyApp) getApplication()).db.insertNewFavBookAsync(new
                         FavBooks(((MyApp) getApplication()).sb.getFullDescBookList().get(pos).getTitle(),
                         ((MyApp) getApplication()).sb.getFullDescBookList().get(pos).getThumbnail(),
@@ -156,8 +165,7 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity imp
             }
         }
         else{
-
-
+            ((MyApp)getApplication()).toggleBtn=0;
         }
     }
 
@@ -193,4 +201,11 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity imp
         public void gettingFavBooksTitleCompleted(FavBooks[] list) {
 
         }
+
+    @Override
+    public void deleteFavBookCompleted() {
+
+    }
+
+
 }

@@ -42,6 +42,9 @@ public class FavBookRecyclerView extends
         Glide.with(context).load(favbook_list.get(position).getThumbnail()).into(holder.img);
 
     }
+    public FavBooks getFavbooksPosition(int position){
+        return favbook_list.get(position);
+    }
 
     @Override
     public int getItemCount() {

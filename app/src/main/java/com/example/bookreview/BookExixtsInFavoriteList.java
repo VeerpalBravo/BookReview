@@ -51,4 +51,9 @@ public class BookExixtsInFavoriteList implements DBManager.DataBaseListener {
                     sb.bookIDList.add(bookIDArrayList.get(i).getBookID());
         }
     }
+
+    @Override
+    public void deleteFavBookCompleted() {
+
+    }
 }
