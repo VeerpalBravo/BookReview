@@ -10,11 +10,6 @@ public class SearchedBooks {
 
     private ArrayList<Book> bookList = new ArrayList<>();
     private ArrayList<Book> fullDescBookList = new ArrayList<>();
-    ArrayList<String> bookIDList = new ArrayList<>();
-
-    public ArrayList<String> getBookIDList(){
-        return bookIDList;
-    }
     public void setBookList(String title, String img, String subtitle, String bookId){
         bookList.add(new Book(title,img, subtitle, bookId));
     }
@@ -34,5 +29,4 @@ public class SearchedBooks {
         return fullDescBookList;
     }
 
-//
 }

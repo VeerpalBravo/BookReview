@@ -98,7 +98,6 @@ public class FavouritesFragment extends Fragment implements  FavBookRecyclerView
     @Override
     public void deleteFavBookCompleted() {
         ((MyApp)getActivity().getApplication()).db.getAllFavBooks();
-        ((MyApp)getActivity().getApplication()).toggleBtn=0;
     }
 
     @Override
@@ -121,7 +120,6 @@ public class FavouritesFragment extends Fragment implements  FavBookRecyclerView
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
             Snackbar.make(flfav,
                     "Item deleted",Snackbar.LENGTH_SHORT).show();
-            ((MyApp)getActivity().getApplication()).toggleBtn=0;
             ((MyApp)getActivity().getApplication()).db.deleteFavBook(adapter.getFavbooksPosition(
                     viewHolder.getAbsoluteAdapterPosition()));
         }

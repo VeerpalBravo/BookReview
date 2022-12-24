@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class BooksListRecyclerView extends AppCompatActivity implements NetworkingServiceForBooks.NetworkingListener,
-        BookInfoRecyclerView.ItemClickListener, DBManager.DataBaseListener{
+        BookInfoRecyclerView.ItemClickListener{
 
     RecyclerView bookList;
     String query;
@@ -26,18 +26,8 @@ public class BooksListRecyclerView extends AppCompatActivity implements Networki
         setContentView(R.layout.activity_books_list_recycler_view);
         ((MyApp)getApplication()).networkingServiceForBooks.listener=this;
         setTitle("Book List");
-        ((MyApp)getApplication()).db.listener=this;
-        ((MyApp)getApplication()).db.getBookDB(this);
-        ((MyApp) getApplication()).db.getTitleFavBooks();
-        System.out.println(((MyApp)getApplication()).sb.getBookIDList()
-                +" booIDList "+bookIDArrayList);
-        for(int i=0;i<bookIDArrayList.size();i++)
-        {
-            Log.d("bookList: ",bookIDArrayList.get(i).getBookID());
-        }
         ((MyApp)getApplication()).sb.getBookList().clear();
         ((MyApp)getApplication()).sb.getFullDescBookList().clear();
-        ((MyApp)getApplication()).sb.bookIDList.clear();
         Intent intent = getIntent();
         query = intent.getStringExtra("query");
 
@@ -61,30 +51,6 @@ public class BooksListRecyclerView extends AppCompatActivity implements Networki
         Log.d("queryValueResume",((MyApp)getApplication()).query);
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        
-    }
 
     @Override
     public void onItemClick(int pos) {
@@ -107,47 +73,4 @@ public class BooksListRecyclerView extends AppCompatActivity implements Networki
 
     }
 
-    @Override
-    public void insertingCommentsCompleted() {
-
-    }
-
-    @Override
-    public void gettingCommentsCompleted(Comments[] list) {
-
-    }
-
-    @Override
-    public void insertingBooksCompleted() {
-
-    }
-
-    @Override
-    public void gettingFavBooksCompleted(FavBooks[] list) {
-
-    }
-
-    @Override
-    public void gettingFavBooksTitleCompleted(FavBooks[] list) {
-        bookIDArrayList=new ArrayList( Arrays.asList(list));
-        for(int i=0;i<bookIDArrayList.size();i++) {
-            ((MyApp)getApplication()).
-                    sb.bookIDList.add(bookIDArrayList.get(i).getBookID());
-        }
-    }
-
-    @Override
-    public void deleteFavBookCompleted() {
-
-    }
-
-    @Override
-    public void deleteFavBookWithBookIDCompleted() {
-
-    }
-
-    @Override
-    public void deleteAllFavBookCompleted() {
-
-    }
 }

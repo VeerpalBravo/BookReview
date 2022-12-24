@@ -41,9 +41,10 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity imp
     Button bookRatingBtn;
     String bookID;
     ToggleButton favorite;
-
-
     int position;
+    private ArrayList<String> bookIDArrayList= new ArrayList();
+    int valueForbookListToUpdate = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +66,10 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity imp
         bookRatingBtn=findViewById(R.id.RateBookBtn);
         favorite=findViewById(R.id.favoriteIcon);
         hyperTextLink=findViewById(R.id.hyperTextLinkPerformFunc);
+        valueForbookListToUpdate=1;
+        ((MyApp)getApplication()).db.listener=this;
+        ((MyApp)getApplication()).db.getBookDB(this);
+        ((MyApp) getApplication()).db.getTitleFavBooks();
         bookRatingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -133,27 +138,24 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity imp
         }
         Glide.with(this).load(((MyApp)getApplication()).sb.getFullDescBookList().get(pos).
                 getThumbnail()).into(img);
-        System.out.println(((MyApp)getApplication()).sb.getBookIDList());
-        if(((MyApp)getApplication()).sb.getBookIDList().contains(bookID)){
-                if(((MyApp)getApplication()).sb.getBookIDList().contains(bookID)){
-                    favorite.setChecked(true);
-                    ((MyApp)getApplication()).toggleBtn=1;
-                }
-                else{
-                    favorite.setChecked(false);
-                    ((MyApp)getApplication()).toggleBtn=0;
-                }
-        }
 
+    }
+    public void checkFunc()
+    {
+        if(bookIDArrayList.contains(bookID)){
+                favorite.setChecked(true);
+        }
+        else{
+                favorite.setChecked(false);
+        }
     }
 
 
     public void favToggleBtnFunc(){
         if(favorite.isChecked()){
-            ((MyApp)getApplication()).toggleBtn=1;
             int pos=((MyApp)getApplication()).pos;
             ((MyApp)getApplication()).db.getTitleFavBooks();
-            if(((MyApp)getApplication()).sb.getBookIDList().contains(bookID)){
+            if(bookIDArrayList.contains(bookID)){
                 Toast.makeText(PerformFunctionOnSelectedBookActivity.this,
                         "This is already in favorite list.",Toast.LENGTH_SHORT).show();
 
@@ -170,16 +172,13 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity imp
         }
         else{
             ((MyApp)getApplication()).db.deleteFavBookWithBookID(bookID);
-            ((MyApp)getApplication()).toggleBtn=0;;
+
         }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        ((MyApp)getApplication()).db.listener=this;
-        ((MyApp)getApplication()).db.getBookDB(this);
-        //toggleButtonFunc();
         showBookDescription(position);
     }
 
@@ -204,6 +203,18 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity imp
     }
         @Override
         public void gettingFavBooksTitleCompleted(FavBooks[] list) {
+            int valueUpdated=0;
+            if(valueForbookListToUpdate==1) {
+                 ArrayList<FavBooks> bookIDList = new ArrayList(Arrays.asList(list));
+                for (int i = 0; i < bookIDList.size(); i++) {
+                            bookIDArrayList.add(bookIDList.get(i).getBookID().toString());
+                }
+                valueUpdated=1;
+            }
+            valueForbookListToUpdate=0;
+            if(valueUpdated==1){
+                checkFunc();
+            }
 
         }
 
