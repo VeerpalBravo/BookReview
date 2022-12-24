@@ -203,6 +203,11 @@ DBManager.DataBaseListener{
     }
 
     @Override
+    public void deleteAllFavBookCompleted() {
+
+    }
+
+    @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("rating", rating);

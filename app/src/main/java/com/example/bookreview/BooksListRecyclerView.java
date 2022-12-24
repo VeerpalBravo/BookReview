@@ -145,4 +145,9 @@ public class BooksListRecyclerView extends AppCompatActivity implements Networki
     public void deleteFavBookWithBookIDCompleted() {
 
     }
+
+    @Override
+    public void deleteAllFavBookCompleted() {
+
+    }
 }

@@ -29,9 +29,14 @@ public class JsonService {
                 JSONObject volumeInfo = bookInfo.getJSONObject("volumeInfo");
                 String bookId= bookInfo.getString("id");
                 JSONObject saleInfo=  bookInfo.getJSONObject("saleInfo");
-
                 String bookTitle=volumeInfo.getString("title");
-                String subTitle = volumeInfo.getString("subtitle");
+                String subTitle;
+                if(volumeInfo.has("subtitle")){
+                    subTitle = volumeInfo.getString("subtitle");
+                }
+                else{
+                    subTitle="No subtitle";
+                }
                 String publisher=volumeInfo.getString("publisher");
                 String published_Date = volumeInfo.getString("publishedDate");
                 String description = volumeInfo.getString("description");

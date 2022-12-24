@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+    android:id="@+id/recentlyReviewedBtn"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:title="@string/recently_reviewed_book"
+    android:layout_gravity="center"/>
+    <item
+        android:id="@+id/maximumReviewedBtn"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:title="@string/maximum_reviewed_book"/>
+    <item
+        android:id="@+id/resetBtn"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:title="@string/reset_favorite_list"/>
+
+</menu>

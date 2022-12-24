@@ -61,4 +61,9 @@ public class BookExixtsInFavoriteList implements DBManager.DataBaseListener {
     public void deleteFavBookWithBookIDCompleted() {
 
     }
+
+    @Override
+    public void deleteAllFavBookCompleted() {
+
+    }
 }

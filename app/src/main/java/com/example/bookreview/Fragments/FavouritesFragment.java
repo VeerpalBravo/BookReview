@@ -44,6 +44,13 @@ public class FavouritesFragment extends Fragment implements  FavBookRecyclerView
         View view=inflater.inflate(R.layout.fragment_favourites, container, false);
         favBookList=view.findViewById(R.id.favbook_list);
         flfav=view.findViewById(R.id.flFav);
+        return view;
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         ((MyApp)getActivity().getApplication()).db.listener=this;
         ((MyApp)getActivity().getApplication()).db.getBookDB(getActivity().getApplicationContext());
         ((MyApp)getActivity().getApplication()).db.getAllFavBooks();
@@ -54,10 +61,7 @@ public class FavouritesFragment extends Fragment implements  FavBookRecyclerView
         favBookList.setLayoutManager(linearLayoutManager);
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(favBookList);
-        return view;
-
     }
-
 
     @Override
     public void onItemClick(int pos) {
@@ -99,6 +103,11 @@ public class FavouritesFragment extends Fragment implements  FavBookRecyclerView
 
     @Override
     public void deleteFavBookWithBookIDCompleted() {
+
+    }
+
+    @Override
+    public void deleteAllFavBookCompleted() {
 
     }
 

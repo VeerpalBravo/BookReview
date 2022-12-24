@@ -2,14 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/home"
         android:icon="@drawable/home_icon"
-        android:title="Home"/>
+        android:title="home"
+        android:actionLayout="@layout/activity_main"/>
     <item
         android:id="@+id/favorite"
         android:icon="@drawable/favorite_xml"
-        android:title="Favorite"/>
+        android:title="favorite"
+        android:actionLayout="@layout/activity_main"/>
     <item
         android:id="@+id/setting"
         android:icon="@drawable/settings_icon"
-        android:title="Settings"/>
+        android:title="settings"
+        android:actionLayout="@layout/activity_main"/>
 
 </menu>

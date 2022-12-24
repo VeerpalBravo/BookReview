@@ -15,6 +15,6 @@ public class MyApp extends Application {
     public DBManager db = new DBManager();
     static ExecutorService executorService = Executors.newFixedThreadPool(4);
     NetworkingServiceForBooks networkingServiceForBooks = new NetworkingServiceForBooks();
-    String query = " ";
+    public String query = " ";
 
 }

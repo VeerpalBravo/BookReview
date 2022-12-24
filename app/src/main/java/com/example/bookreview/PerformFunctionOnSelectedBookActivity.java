@@ -150,7 +150,7 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity imp
 
     public void favToggleBtnFunc(){
         if(favorite.isChecked()){
-
+            ((MyApp)getApplication()).toggleBtn=1;
             int pos=((MyApp)getApplication()).pos;
             ((MyApp)getApplication()).db.getTitleFavBooks();
             if(((MyApp)getApplication()).sb.getBookIDList().contains(bookID)){
@@ -159,7 +159,6 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity imp
 
             }
             else {
-                ((MyApp)getApplication()).toggleBtn=1;
                 ((MyApp) getApplication()).db.insertNewFavBookAsync(new
                         FavBooks(((MyApp) getApplication()).sb.getFullDescBookList().get(pos).getTitle(),
                         ((MyApp) getApplication()).sb.getFullDescBookList().get(pos).getThumbnail(),
@@ -215,6 +214,11 @@ public class PerformFunctionOnSelectedBookActivity extends AppCompatActivity imp
 
     @Override
     public void deleteFavBookWithBookIDCompleted() {
+
+    }
+
+    @Override
+    public void deleteAllFavBookCompleted() {
 
     }
 
